@@ -8,12 +8,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def mandlebrot(npts = 300, max_iter =100):
+def mandlebrot(npts=300, max_iter=100, n=2):
     """
     this function takes in number of points and max no of iterations as resolution parameters and PLOTS
     a graphical representation of the mandelbrot set
+    fc(z) = z**n + c
     :param npts: number of points
     :param max_iter: maximum iteration
+    :param n: n in the equation above
     :return: None
     """
     X = np.linspace(-2, 2, 2 * npts)
@@ -24,7 +26,7 @@ def mandlebrot(npts = 300, max_iter =100):
     mask = exit_times > 0
 
     for k in range(max_iter):
-        Z[mask] = Z[mask] * Z[mask] + C[mask]
+        Z[mask] = Z[mask]**n + C[mask]
         mask, old_mask = abs(Z) < 2, mask
         exit_times[mask ^ old_mask] = k
 
@@ -34,4 +36,4 @@ def mandlebrot(npts = 300, max_iter =100):
     plt.show()
 
 
-mandlebrot(300, 120)
+mandlebrot(1000, 130, 2)
